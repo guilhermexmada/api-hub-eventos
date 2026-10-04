@@ -1,0 +1,40 @@
+# nome na aba github
+name: CI
+
+# roda a cada push em qqr branch
+on: push
+
+jobs:
+  validar:
+    name: Lint, tipos e build
+    # vm do github
+    runs-on: ubuntu-latest
+    # passo a passo do workflow
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v7
+
+      - name: Instalar o pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
+      - name: Instalar o Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Instalar as dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Verificar o código (ESLint)
+        run: pnpm lint
+
+      - name: Verificar a formatação (Prettier)
+        run: pnpm format:check
+
+      - name: Verificar os tipos (tsc --noEmit)
+        run: pnpm type-check
+
+      - name: Compilar o projeto (build)
+        run: pnpm build
