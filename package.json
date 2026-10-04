@@ -25,6 +25,7 @@
     "pg": "^8.23.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.8",
+    "sequelize-cli": "^6.6.5",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
@@ -38,7 +39,6 @@
     "globals": "^17.13.0",
     "husky": "^9.1.7",
     "prettier": "^3.9.9",
-    "sequelize-cli": "^6.6.5",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.71.0"

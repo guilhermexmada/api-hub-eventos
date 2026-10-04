@@ -26,6 +26,9 @@ importers:
       sequelize:
         specifier: ^6.37.8
         version: 6.37.8(pg-hstore@2.3.4)(pg@8.23.1)(supports-color@7.2.0)
+      sequelize-cli:
+        specifier: ^6.6.5
+        version: 6.6.5
       swagger-ui-express:
         specifier: ^5.0.1
         version: 5.0.1(express@5.2.1(supports-color@7.2.0))
@@ -60,9 +63,6 @@ importers:
       prettier:
         specifier: ^3.9.9
         version: 3.9.9
-      sequelize-cli:
-        specifier: ^6.6.5
-        version: 6.6.5
       tsx:
         specifier: ^4.23.15
         version: 4.23.15
