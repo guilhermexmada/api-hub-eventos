@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import cors from 'cors';
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './config/swagger.json';
 import { appRoutes } from './routes';
@@ -28,4 +28,3 @@ app.get('/api/health', (req: Request, res: Response) => {
 });
 
 export default app;
-
