@@ -5,7 +5,7 @@ export class EventoController {
   // lista todos os eventos
   public static async index(req: Request, res: Response): Promise<Response> {
     try {
-      const eventos = await Evento.findAll({ order: [['data', 'ASC']] }); 
+      const eventos = await Evento.findAll({ order: [['data', 'ASC']] });
       return res.status(200).json(eventos);
     } catch (error) {
       return res.status(500).json({
