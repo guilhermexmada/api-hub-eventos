@@ -1,0 +1,38 @@
+services:
+  # banco
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hub_eventos
+    volumes:
+      # persistencia
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # verifica se banco já aceita conexões
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d hub_eventos']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # api
+  api:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: hub_eventos
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_SSL: 'false'
+    depends_on:
+      db:
+        # só inicia api depois do bd
+        condition: service_healthy
+
+volumes:
+  pgdata:
