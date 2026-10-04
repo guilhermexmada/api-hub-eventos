@@ -12,7 +12,8 @@
     "format": "prettier --write \"src/**/*.{ts,cjs,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,cjs,json}\"",
     "db:migrate": "sequelize-cli db:migrate",
-    "db:migrate:undo": "sequelize-cli db:migrate:undo:all"
+    "db:migrate:undo": "sequelize-cli db:migrate:undo:all",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +36,7 @@
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.13.0",
+    "husky": "^9.1.7",
     "prettier": "^3.9.9",
     "sequelize-cli": "^6.6.5",
     "tsx": "^4.23.15",
