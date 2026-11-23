@@ -81,9 +81,9 @@ Ao marcar presença, o evento perde uma vaga; ao cancelar, a vaga volta.
 
 ## API em produção
 
-- URL: https://SUA-URL.onrender.com/api
-- Health check: https://SUA-URL.onrender.com/api/health
-- Swagger: https://SUA-URL.onrender.com/api-docs
+- URL: https://api-hub-eventos.onrender.com/api
+- Health check: https://api-hub-eventos.onrender.com/api/health
+- Swagger: https://api-hub-eventos.onrender.com/api-docs
 
 O deploy é feito pelo GitHub Actions (`.github/workflows/deploy.yml`):
 CI (lint, tipos e build) → build da imagem Docker → Deploy Hook do Render.
