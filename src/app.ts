@@ -21,8 +21,9 @@ app.use('/api', appRoutes);
 // rota de health check básica
 app.get('/api/health', (req: Request, res: Response) => {
   res.status(200).json({
-    status: 'OK',
+    status: 'ok',
     mensagem: 'Servidor rodando com sucesso.',
+    uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
   });
 });

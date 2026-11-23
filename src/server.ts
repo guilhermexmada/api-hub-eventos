@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { sequelize } from './config/database';
 import app from './app';
 
-const PORT = Number(process.env.PORT ?? 3000);
+const PORT = Number(process.env.PORT || 3000);
 
 async function iniciarServidor(): Promise<void> {
   try {
