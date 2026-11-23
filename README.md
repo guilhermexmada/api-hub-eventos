@@ -78,3 +78,12 @@ Ao marcar presença, o evento perde uma vaga; ao cancelar, a vaga volta.
 | `pnpm format`       | Formata o código com o Prettier             |
 | `pnpm type-check`   | Verifica os tipos                           |
 | `pnpm db:migrate`   | Cria as tabelas no banco                    |
+
+## API em produção
+
+- URL: https://SUA-URL.onrender.com/api
+- Health check: https://SUA-URL.onrender.com/api/health
+- Swagger: https://SUA-URL.onrender.com/api-docs
+
+O deploy é feito pelo GitHub Actions (`.github/workflows/deploy.yml`):
+CI (lint, tipos e build) → build da imagem Docker → Deploy Hook do Render.
