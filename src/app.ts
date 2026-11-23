@@ -25,6 +25,7 @@ app.get('/api/health', (req: Request, res: Response) => {
     mensagem: 'Servidor rodando com sucesso.',
     uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
+    versao: '1.1.0',
   });
 });
 
