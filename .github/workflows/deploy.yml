@@ -1,0 +1,65 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    name: CI - lint, tipos e build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v7
+
+      - name: Instalar o pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
+      - name: Instalar o Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Instalar as dependências
+        run: pnpm install --frozen-lockfile
+
+      - name: Verificar o código (ESLint)
+        run: pnpm lint
+
+      - name: Verificar a formatação (Prettier)
+        run: pnpm format:check
+
+      - name: Verificar os tipos (tsc --noEmit)
+        run: pnpm type-check
+
+      - name: Compilar o projeto (build)
+        run: pnpm build
+
+  docker:
+    name: CD - build da imagem Docker
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código do repositório
+        uses: actions/checkout@v7
+
+      - name: Construir a imagem Docker
+        run: docker build -t api-hub-eventos .
+
+  deploy:
+    name: Deploy no Render (Deploy Hook)
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar o Deploy Hook do Render
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$RENDER_DEPLOY_HOOK_URL")
+          echo "Status HTTP do Deploy Hook: $STATUS"
+          if [ "$STATUS" != "200" ] && [ "$STATUS" != "201" ]; then
+            echo "Falha ao disparar o deploy no Render."
+            exit 1
+          fi
